@@ -1,5 +1,5 @@
 var apiKey = "1ab627320337b55a37f95f68c3756c74";
-
+var title
 var serachBtn = document.getElementById("search-btn");
 serachBtn.addEventListener("click", getCity);
 var trial1 = document.getElementById("trial");
