@@ -4,14 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Movies</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link href="./assets/styles.css" rel="stylesheet" />
   </head>
   <body>
-    <section class="container">
+
+    <nav class="navbar is-black" role="navigation" aria-label="main navigation">
+      <div class="is-size-2 ml-5 is-family-monospace">
+        <div>Team Three Movies</div>
+      </div>
+          <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-end">
+          <a class="navbar-item mr-4 is-size-4 is-family-monospace">
+            Home
+          </a>
+        </div>
+      </div>
+    </nav>
+<section class="container">
       <h1 class="is-size-1">Search For a Movie</h1>
       <div class="field is-grouped container">
         <div class="control is-expanded">
@@ -28,6 +38,7 @@
         <div id="trial"></div>
       </div>
     </section>
+
     <script src="./assets/scripts.js"></script>
   </body>
 </html>
