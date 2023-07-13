@@ -1,27 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Movies</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-  <link href="./assets/styles.css" rel="stylesheet" />
-</head>
-
-<body>
-  <h1>Movies</h1>
-  <div class="field is-grouped">
-    <p class="control is-expanded">
-      <input class="input" type="text" placeholder="Find a repository">
-    </p>
-    <p class="control">
-      <a class="button is-info">
-        Search
-      </a>
-    </p>
-  </div>
-  <div class="column">
+<html lang="en">  
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movies</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link href="./assets/styles.css" rel="stylesheet" />
+  </head>
+  
+  <body>
+ <nav class="navbar is-black" role="navigation" aria-label="main navigation">
+      <div class="is-size-2 ml-5 is-family-monospace">
+        <div>Team Three Movies</div>
+      </div>
+          <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-end">
+          <a class="navbar-item mr-4 is-size-4 is-family-monospace">
+            Home
+          </a>
+        </div>
+      </div>
+    </nav>
+<section class="container">
+      <h1 class="is-size-1">Search For a Movie</h1>
+      <div class="field is-grouped container">
+        <div class="control is-expanded">
+          <input class="input is-large" type="text" placeholder="ex: Drive" />
+        </div>
+        <div class="control is-align-self-center">
+          <a
+            id="search-btn"
+            class="button is-info is-large has-background-black"
+          >
+            Search
+          </a>
+        </div>
+        <div id="trial"></div>
+      </div>
+    </section>
+    
+    div class="column">
     <div class="column header">
       <h1 class="is-size-1 has-text-weight-bold">Trending</h1>
     </div>
@@ -61,12 +79,6 @@
       </div>
     </div>
   </div>
-
-
-
-
-
-  <script src="./assets/scripts.js"></script>
-</body>
+  </body>
 
 </html>
