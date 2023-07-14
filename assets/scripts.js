@@ -59,12 +59,12 @@ function request(title) {
           SearchedTitleDiv.text('')
           
           searchedTitle.text('Searched Movie: ' + title.toUpperCase())
-          searchedTitle.addClass("is-size-2 is-family-sans-serif has-text-black ml-5");
+          searchedTitle.addClass("is-size-2 is-family-sans-serif has-text-black m-6");
           SearchedTitleDiv.append(searchedTitle)
-          data.results.map(result => {
-            console.log(result)
-            createMovieGrid(searchedDiv, result)
-          })
+          for (i = 0; i < 8; i++){
+            createMovieGrid(searchedDiv, data.results[i])
+          }
+          
           movieId = data.results[0].id;
           console.log(typeof movieId);
           moviecredits();
@@ -163,7 +163,7 @@ function createMovieGrid(location, movieData) {
   imageDiv.append(imgTag);
   titleDiv.append(pTag);
   pTag.text(movieTitle);
-  createDiv.addClass("card-movie is-inline-block p-4");
+  createDiv.addClass("card-movie is-inline-block p-4 m-5");
   imageDiv.addClass("image");
   titleDiv.addClass(
     "content is-medium is-family-sans-serif has-text-black has-text-centered "
