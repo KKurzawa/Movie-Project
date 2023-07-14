@@ -1,17 +1,35 @@
 var apiKey = "1ab627320337b55a37f95f68c3756c74";
-var title
-var serachBtn = document.getElementById("search-btn");
-serachBtn.addEventListener("click", getCity);
-var trial1 = document.getElementById("trial");
 var movieId;
+var title;
 
-function getCity() {
-  // function to clear input
-  trial1.innerText = "";
-  var input = document.querySelector(".input");
-  title = input.value;
+var serachBtn = document.getElementById("search-btn");
+
+if (serachBtn) {
+  serachBtn.addEventListener("click", loadPage);
+}
+
+// function getTitle() {
+//   var input = document.querySelector(".input");
+//   title = input.value;
+//   console.log(title);
+//   // request();
+// }
+function loadPage() {
+  window.location.assign(
+    "results.html?q=" +
+      encodeURIComponent(document.querySelector("input.input").value)
+  );
+  getSearchParameters();
+}
+function getSearchParameters() {
+  var movieTitle = new URLSearchParams(window.location.search);
+  title = movieTitle.get("q");
+  console.log(title);
   request();
 }
+// var trial1 = document.getElementById("trial");
+// function to clear input
+// trial1.innerText = "";
 
 function request() {
   var requestCity =
@@ -95,32 +113,34 @@ function getPopular() {
       response.json().then(function (data) {
         console.log(data);
         for (var i = 0; i < 12; i++) {
-          createPopularMovie(data.results[i])
+          createPopularMovie(data.results[i]);
         }
-      })
+      });
     }
-  })
+  });
 }
 function createPopularMovie(movieData) {
-  var movieTitle = movieData.title
-  var moviePoster = "https://image.tmdb.org/t/p/w342" + movieData.poster_path
-  var movieId = movieData.id
-  var createDiv = $("<div>")
-  var imageDiv = $("<div>")
-  var titleDiv = $("<div>")
-  var imgTag = $("<img>")
-  var pTag = $("<p>")
-  var popularContainer = $("#popular-container")
-  popularContainer.append(createDiv)
-  createDiv.append(imageDiv)
-  createDiv.append(titleDiv)
-  imageDiv.append(imgTag)
-  titleDiv.append(pTag)
-  pTag.text(movieTitle)
-  createDiv.addClass("card-image is-inline-block p-4")
-  imageDiv.addClass("image")
-  titleDiv.addClass( "content is-medium is-family-sans-serif has-text-black has-text-centered ")
-  imgTag.attr("src", moviePoster)
-  console.log(movieTitle, moviePoster, movieId)
+  var movieTitle = movieData.title;
+  var moviePoster = "https://image.tmdb.org/t/p/w342" + movieData.poster_path;
+  var movieId = movieData.id;
+  var createDiv = $("<div>");
+  var imageDiv = $("<div>");
+  var titleDiv = $("<div>");
+  var imgTag = $("<img>");
+  var pTag = $("<p>");
+  var popularContainer = $("#popular-container");
+  popularContainer.append(createDiv);
+  createDiv.append(imageDiv);
+  createDiv.append(titleDiv);
+  imageDiv.append(imgTag);
+  titleDiv.append(pTag);
+  pTag.text(movieTitle);
+  createDiv.addClass("card-image is-inline-block p-4");
+  imageDiv.addClass("image");
+  titleDiv.addClass(
+    "content is-medium is-family-sans-serif has-text-black has-text-centered "
+  );
+  imgTag.attr("src", moviePoster);
+  console.log(movieTitle, moviePoster, movieId);
 }
-getPopular()
+// getPopular();
