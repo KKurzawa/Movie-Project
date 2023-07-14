@@ -1,47 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Movies</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-  <link href="./assets/styles.css" rel="stylesheet" />
-</head>
-
-<body>
-
-  <nav class="navbar is-black" role="navigation" aria-label="main navigation">
-    <div class="is-size-1 ml-5 is-family-sans-serif">
-      <h1>Team Three Movies</h1>
-    </div>
-    <div class="navbar-end">
-      <a class="navbar-item mr-4 is-size-4 is-family-sans-serif">
-        Home
-      </a>
-    </div>
-  </nav>
-  <section class="container">
-    <h1 class="is-size-2 is-family-sans-serif has-text-black">Search For a Movie</h1>
-    <div class="field is-grouped container">
-      <div class="control is-expanded">
-        <input class="input is-large" type="text" placeholder="ex: Drive" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movies</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <link href="./assets/styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <nav class="navbar is-black" role="navigation" aria-label="main navigation">
+      <div class="is-size-1 ml-5 is-family-sans-serif">
+        <h1>Team Three Movies</h1>
       </div>
-      <div class="control is-align-self-center">
-        <a id="search-btn" class="button is-info is-large has-background-black is-family-sans-serif">
-          Search
+      <div class="navbar-end">
+        <a
+          class="navbar-item mr-4 is-size-4 is-family-sans-serif"
+          href="./index.html"
+        >
+          Home
         </a>
       </div>
-      <div id="trial"></div>
-    </div>
-  </section>
-  <div><h1 class="is-size-1 has-text-weight-bold is-family-sans-serif has-text-black">Trending</h1>
+    </nav>
+    <section class="container">
+      <h1 class="is-size-2 is-family-sans-serif has-text-black">
+        Search For a Movie
+      </h1>
+      <div class="field is-grouped container">
+        <div class="control is-expanded">
+          <input class="input is-large" type="text" placeholder="ex: Drive" />
+        </div>
+        <div class="control is-align-self-center">
+          <a
+            id="search-btn"
+            class="button is-info is-large has-background-black is-family-sans-serif"
+          >
+            Search
+          </a>
+        </div>
+        <div id="trial"></div>
+      </div>
+    </section>
+    <div id="searched"></div>
+    <div><h1 class="is-size-1 has-text-weight-bold is-family-sans-serif has-text-black">Trending</h1>
   <div class="is-flex is-flex-wrap-wrap is-justify-content-centered" id="popular-container">
   </div>
 </div>
-  <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
-    crossorigin="anonymous"></script>
-  <script src="./assets/scripts.js"></script>
-</body>
-
+    <script
+      src="https://code.jquery.com/jquery-3.7.0.js"
+      integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+      crossorigin="anonymous"
+    ></script>
+    <script src="./assets/scripts.js"></script>
+  </body>
 </html>
+
