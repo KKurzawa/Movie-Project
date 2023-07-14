@@ -51,11 +51,15 @@ function request(title) {
           error1.text('Error')
           trial1.append(error1);
         } else if (data.results.length != 0) {
-          searchedDiv.text('')
+          var SearchedTitleDiv = $('#searched-title')
           var searchedTitle = $('<h3>');
+          
+          searchedDiv.text('')
+          SearchedTitleDiv.text('')
+          
           searchedTitle.text('Searched Movie: ' + title.toUpperCase())
-          searchedTitle.addClass("is-size-2 is-family-sans-serif");
-          searchedDiv.append(searchedTitle)
+          searchedTitle.addClass("is-size-2 is-family-sans-serif has-text-black ml-5");
+          SearchedTitleDiv.append(searchedTitle)
           data.results.map(result => {
             console.log(result)
             createMovieGrid(searchedDiv, result)
