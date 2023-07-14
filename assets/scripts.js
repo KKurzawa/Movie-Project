@@ -83,3 +83,44 @@ function moviecredits() {
     }
   });
 }
+
+function getPopular() {
+  var requestPopular =
+    "https://api.themoviedb.org/3/movie/popular?&language=en-US&api_key=" +
+    apiKey;
+  fetch(requestPopular).then(function (response) {
+    if (response.ok) {
+      console.log("Popular List");
+      console.log(response);
+      response.json().then(function (data) {
+        console.log(data);
+        for (var i = 0; i < 12; i++) {
+          createPopularMovie(data.results[i])
+        }
+      })
+    }
+  })
+}
+function createPopularMovie(movieData) {
+  var movieTitle = movieData.title
+  var moviePoster = "https://image.tmdb.org/t/p/w342" + movieData.poster_path
+  var movieId = movieData.id
+  var createDiv = $("<div>")
+  var imageDiv = $("<div>")
+  var titleDiv = $("<div>")
+  var imgTag = $("<img>")
+  var pTag = $("<p>")
+  var popularContainer = $("#popular-container")
+  popularContainer.append(createDiv)
+  createDiv.append(imageDiv)
+  createDiv.append(titleDiv)
+  imageDiv.append(imgTag)
+  titleDiv.append(pTag)
+  pTag.text(movieTitle)
+  createDiv.addClass("card-image is-inline-block p-4")
+  imageDiv.addClass("image")
+  titleDiv.addClass( "content is-medium is-family-sans-serif has-text-black has-text-centered ")
+  imgTag.attr("src", moviePoster)
+  console.log(movieTitle, moviePoster, movieId)
+}
+getPopular()
