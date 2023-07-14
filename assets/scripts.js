@@ -9,58 +9,29 @@ if (serachBtn) {
   serachBtn.addEventListener("click", getTitle);
 }
 
+$('body').on('click', '.card-movie', loadPage)
+
 function getTitle() {
   var input = document.querySelector(".input");
   title = input.value;
   console.log(title);
   request(title);
 }
-// function loadPage() {
-//   window.location.assign(
-//     "results.html?q=" +
-//       encodeURIComponent(document.querySelector("input.input").value)
-//   );
-//   getSearchParameters();
-// }
-// function getSearchParameters() {
-//   var movieTitle = new URLSearchParams(window.location.search);
-//   title = movieTitle.get("q");
-//   console.log(title);
-//   request();
-// }
+function loadPage() {
+  window.location.assign(
+    "results.html?q=" +
+      encodeURIComponent(document.querySelector("input.input").value)
+  );
+  getSearchParameters();
+}
+function getSearchParameters() {
+  var movieTitle = new URLSearchParams(window.location.search);
+  title = movieTitle.get("q");
+  console.log(title);
+  request();
+}
 var trial1 = document.getElementById("trial");
-// function to clear input
-// trial1.innerText = "";
 
-// function request(title) {
-//   var requestMovies =
-//     "https://api.themoviedb.org/3/search/multi?&language=en-US&query=" +
-//     title +
-//     "&api_key=" +
-//     apiKey;
-//   fetch(requestMovies).then(function (response) {
-//     if (response.ok) {
-//       console.log("all good");
-//       console.log(response);
-//       response.json().then(function (data) {
-//         console.log(data);
-//         if (data.results.length === 0) {
-//           console.log("error");
-//           var error1 = document.createElement("h2");
-//           error1.textContent = "Error";
-//           trial1.append(error1);
-//         } else if (data.results.length != 0) {
-//           movieId = data.results[0].id;
-//           console.log(typeof movieId);
-//           moviecredits();
-//           inputEl(data);
-//         }
-//       });
-//     } else {
-//       console.log("error");
-//     }
-//   });
-// }
 
 function request(title) {
   var requestMovies =
@@ -80,8 +51,10 @@ function request(title) {
           error1.text('Error')
           trial1.append(error1);
         } else if (data.results.length != 0) {
+          searchedDiv.text('')
           var searchedTitle = $('<h3>');
           searchedTitle.text('Searched Movie: ' + title.toUpperCase())
+          searchedTitle.addClass("is-size-2 is-family-sans-serif");
           searchedDiv.append(searchedTitle)
           data.results.map(result => {
             console.log(result)
@@ -89,7 +62,7 @@ function request(title) {
           })
           movieId = data.results[0].id;
           console.log(typeof movieId);
-          // moviecredits();
+          moviecredits();
           // inputEl(data);
         }
       });
@@ -178,11 +151,12 @@ function createMovieGrid(location, movieData) {
   imageDiv.append(imgTag);
   titleDiv.append(pTag);
   pTag.text(movieTitle);
-  createDiv.addClass("card-image is-inline-block p-4");
+  createDiv.addClass("card-movie is-inline-block p-4");
   imageDiv.addClass("image");
   titleDiv.addClass(
     "content is-medium is-family-sans-serif has-text-black has-text-centered "
   );
+  createDiv.attr('id',movieId)
   imgTag.attr("src", moviePoster);
   console.log(movieTitle, moviePoster, movieId);
 }
