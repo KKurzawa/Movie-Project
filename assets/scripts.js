@@ -2,6 +2,7 @@ var apiKey = "1ab627320337b55a37f95f68c3756c74";
 var movieId;
 var searchedDiv = $('#searched')
 var popularContainer = $("#popular-container");
+var placeholderImage = 'https://www.content.numetro.co.za/ui_images/no_poster.png'
 
 var serachBtn = document.getElementById("search-btn");
 
@@ -141,8 +142,15 @@ function createMovieGrid(location, movieData) {
   if (movieData.name) {
     var movieTitle = movieData.name;
   }
+
+  if (movieData.poster_path) {
+    var moviePoster = "https://image.tmdb.org/t/p/w342" + movieData.poster_path;
+  } else {
+    var moviePoster = placeholderImage;
+  }
+
   
-  var moviePoster = "https://image.tmdb.org/t/p/w342" + movieData.poster_path;
+  
   var movieId = movieData.id;
   var createDiv = $("<div>");
   var imageDiv = $("<div>");

@@ -1,0 +1,10 @@
+.card-movie {
+  height: 575px;
+  width: 374px;
+}
+
+#image {
+  height: 513px;
+  width: 342px;
+  object-fit: cover;
+}
