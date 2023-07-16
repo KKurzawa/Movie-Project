@@ -13,10 +13,8 @@ if (serachBtn) {
   serachBtn.addEventListener("click", getTitle);
 }
 
-
 //adds event listener to dynamiclly created items
-$('body').on('click', '.card-movie', loadPage)
-
+$("body").on("click", ".card-movie", loadPage);
 
 //function for taking search input and calling fetch function
 function getTitle() {
@@ -29,14 +27,13 @@ function getTitle() {
 //function to change page
 function loadPage() {
   window.location.assign("results.html?q=" + encodeURIComponent(this.id));
-
+}
 //function to fetch with query parameters
 function getSearchParameters() {
   var movieTitle = new URLSearchParams(window.location.search);
   title = movieTitle.get("q");
   console.log(title);
   request();
-
 }
 
 // function getSearchParameters() {
@@ -68,22 +65,23 @@ function request(title) {
           error1.text("Error");
           trial1.append(error1);
         } else if (data.results.length != 0) {
-
           //creates a title and div container for searched movie title
-          var SearchedTitleDiv = $('#searched-title')
-          var searchedTitle = $('<h3>');
+          var SearchedTitleDiv = $("#searched-title");
+          var searchedTitle = $("<h3>");
           //clears previous search
-          searchedDiv.text('')
-          SearchedTitleDiv.text('')
+          searchedDiv.text("");
+          SearchedTitleDiv.text("");
           //setting html and appending search to div
-          searchedTitle.text('Searched Movie: ' + title.toUpperCase())
-          searchedTitle.addClass("is-size-2 is-family-sans-serif has-text-black m-6");
-          SearchedTitleDiv.append(searchedTitle)
-          //calls the function of movie grid and passes the location and data 
-          for (i = 0; i < 8; i++){
-            createMovieGrid(searchedDiv, data.results[i])
+          searchedTitle.text("Searched Movie: " + title.toUpperCase());
+          searchedTitle.addClass(
+            "is-size-2 is-family-sans-serif has-text-black m-6"
+          );
+          SearchedTitleDiv.append(searchedTitle);
+          //calls the function of movie grid and passes the location and data
+          for (i = 0; i < 8; i++) {
+            createMovieGrid(searchedDiv, data.results[i]);
           }
-          
+
           movieId = data.results[0].id;
           console.log(typeof movieId);
           moviecredits();
@@ -104,29 +102,20 @@ function inputEl(data) {
   console.log(data.results[0].id);
   movidId = data.results[0].id;
 
+  searchedDiv.text("");
+  SearchedTitleDiv.text("");
 
-          searchedDiv.text("");
-          SearchedTitleDiv.text("");
+  searchedTitle.text("Searched Movie: " + title.toUpperCase());
+  searchedTitle.addClass("is-size-2 is-family-sans-serif has-text-black m-6");
+  SearchedTitleDiv.append(searchedTitle);
+  for (i = 0; i < 8; i++) {
+    createMovieGrid(searchedDiv, data.results[i]);
+  }
 
-          searchedTitle.text("Searched Movie: " + title.toUpperCase());
-          searchedTitle.addClass(
-            "is-size-2 is-family-sans-serif has-text-black m-6"
-          );
-          SearchedTitleDiv.append(searchedTitle);
-          for (i = 0; i < 8; i++) {
-            createMovieGrid(searchedDiv, data.results[i]);
-          }
-
-          // movieId = data.results[i].id;
-          // console.log(typeof movieId);
-          // moviecredits();
-          // inputEl(data);
-        }
-      });
-    } else {
-      console.log("error");
-    }
-  });
+  // movieId = data.results[i].id;
+  // console.log(typeof movieId);
+  // moviecredits();
+  // inputEl(data);
 }
 
 function getPopular() {
@@ -140,7 +129,7 @@ function getPopular() {
       console.log(response);
       response.json().then(function (data) {
         console.log(data);
-        //calls movie grid function and passes a location and data 
+        //calls movie grid function and passes a location and data
         for (var i = 0; i < 8; i++) {
           //limit to first 8 results
           createMovieGrid(popularContainer, data.results[i]);
@@ -150,14 +139,14 @@ function getPopular() {
   });
 }
 function createMovieGrid(location, movieData) {
-  //checks if moveData.title exists or movieData.name exists and sets 
+  //checks if moveData.title exists or movieData.name exists and sets
   if (movieData.title) {
     var movieTitle = movieData.title;
   }
   if (movieData.name) {
     var movieTitle = movieData.name;
   }
-//checks if there is a poster path and if not returns a place holder image
+  //checks if there is a poster path and if not returns a place holder image
   if (movieData.poster_path) {
     var moviePoster = "https://image.tmdb.org/t/p/w342" + movieData.poster_path;
   } else {
