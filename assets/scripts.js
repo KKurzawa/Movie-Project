@@ -1,8 +1,9 @@
 var apiKey = "1ab627320337b55a37f95f68c3756c74";
 var movieId;
-var searchedDiv = $('#searched')
+var searchedDiv = $("#searched");
 var popularContainer = $("#popular-container");
-var placeholderImage = 'https://www.content.numetro.co.za/ui_images/no_poster.png'
+var placeholderImage =
+  "https://www.content.numetro.co.za/ui_images/no_poster.png";
 
 var trial1 = document.getElementById("trial");
 var serachBtn = document.getElementById("search-btn");
@@ -12,8 +13,10 @@ if (serachBtn) {
   serachBtn.addEventListener("click", getTitle);
 }
 
+
 //adds event listener to dynamiclly created items
 $('body').on('click', '.card-movie', loadPage)
+
 
 //function for taking search input and calling fetch function
 function getTitle() {
@@ -25,12 +28,7 @@ function getTitle() {
 
 //function to change page
 function loadPage() {
-  window.location.assign(
-    "results.html?q=" +
-      encodeURIComponent(this.id)
-  );
-  getSearchParameters();
-}
+  window.location.assign("results.html?q=" + encodeURIComponent(this.id));
 
 //function to fetch with query parameters
 function getSearchParameters() {
@@ -38,8 +36,16 @@ function getSearchParameters() {
   title = movieTitle.get("q");
   console.log(title);
   request();
+
 }
 
+// function getSearchParameters() {
+//   var params = new URLSearchParams(window.location.search);
+//   var idMovie = params.get("q");
+//   console.log("url pulled id " + idMovie);
+// }
+
+var trial1 = document.getElementById("trial");
 
 //function to fetch api
 function request(title) {
@@ -58,10 +64,11 @@ function request(title) {
         console.log(data);
         if (data.results.length === 0) {
           console.log("error");
-          var error1 = $('<h2>')
-          error1.text('Error')
+          var error1 = $("<h2>");
+          error1.text("Error");
           trial1.append(error1);
         } else if (data.results.length != 0) {
+
           //creates a title and div container for searched movie title
           var SearchedTitleDiv = $('#searched-title')
           var searchedTitle = $('<h3>');
@@ -97,35 +104,27 @@ function inputEl(data) {
   console.log(data.results[0].id);
   movidId = data.results[0].id;
 
-  var movieTitle = document.createElement("h2");
-  var description = document.createElement("p");
-  movieTitle.textContent = data.results[0].title;
-  description.textContent = data.results[0].overview;
 
-  var currentimage = document.createElement("img");
-  currentimage.src =
-    "https://image.tmdb.org/t/p/w500" + data.results[0].poster_path;
-  trial1.append(movieTitle, description, currentimage);
-}
+          searchedDiv.text("");
+          SearchedTitleDiv.text("");
 
-function moviecredits() {
-  var requestCity =
-    "https://api.themoviedb.org/3/movie/" +
-    movieId +
-    "/credits?language=en-US&api_key=" +
-    apiKey;
-  fetch(requestCity).then(function (response) {
-    if (response.ok) {
-      console.log("credits data");
-      console.log(response);
-      response.json().then(function (data) {
-        console.log(data);
-        for (var i = 0; i < 5; i++) {
-          console.log(data.cast[i].name);
+          searchedTitle.text("Searched Movie: " + title.toUpperCase());
+          searchedTitle.addClass(
+            "is-size-2 is-family-sans-serif has-text-black m-6"
+          );
+          SearchedTitleDiv.append(searchedTitle);
+          for (i = 0; i < 8; i++) {
+            createMovieGrid(searchedDiv, data.results[i]);
+          }
+
+          // movieId = data.results[i].id;
+          // console.log(typeof movieId);
+          // moviecredits();
+          // inputEl(data);
         }
       });
     } else {
-      alert("Error: " + response.statusText);
+      console.log("error");
     }
   });
 }
@@ -165,8 +164,6 @@ function createMovieGrid(location, movieData) {
     var moviePoster = placeholderImage;
   }
 
-  
-  
   var movieId = movieData.id;
   var createDiv = $("<div>");
   var imageDiv = $("<div>");
@@ -184,7 +181,7 @@ function createMovieGrid(location, movieData) {
   titleDiv.addClass(
     "content is-medium is-family-sans-serif has-text-black has-text-centered "
   );
-  createDiv.attr('id',movieId)
+  createDiv.attr("id", movieId);
   imgTag.attr("src", moviePoster);
   console.log(movieTitle, moviePoster, movieId);
 }
