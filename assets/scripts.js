@@ -1,8 +1,9 @@
 var apiKey = "1ab627320337b55a37f95f68c3756c74";
 var movieId;
-var searchedDiv = $('#searched')
+var searchedDiv = $("#searched");
 var popularContainer = $("#popular-container");
-var placeholderImage = 'https://www.content.numetro.co.za/ui_images/no_poster.png'
+var placeholderImage =
+  "https://www.content.numetro.co.za/ui_images/no_poster.png";
 
 var serachBtn = document.getElementById("search-btn");
 
@@ -10,7 +11,7 @@ if (serachBtn) {
   serachBtn.addEventListener("click", getTitle);
 }
 
-$('body').on('click', '.card-movie', loadPage)
+$("body").on("click", ".card-movie", loadPage);
 
 function getTitle() {
   var input = document.querySelector(".input");
@@ -19,20 +20,17 @@ function getTitle() {
   request(title);
 }
 function loadPage() {
-  window.location.assign(
-    "results.html?q=" +
-      encodeURIComponent(document.querySelector("input.input").value)
-  );
-  getSearchParameters();
+  window.location.assign("results.html?q=" + encodeURIComponent(this.id));
+  // getSearchParameters();
 }
-function getSearchParameters() {
-  var movieTitle = new URLSearchParams(window.location.search);
-  title = movieTitle.get("q");
-  console.log(title);
-  request();
-}
-var trial1 = document.getElementById("trial");
 
+// function getSearchParameters() {
+//   var params = new URLSearchParams(window.location.search);
+//   var idMovie = params.get("q");
+//   console.log("url pulled id " + idMovie);
+// }
+
+var trial1 = document.getElementById("trial");
 
 function request(title) {
   var requestMovies =
@@ -48,72 +46,33 @@ function request(title) {
         console.log(data);
         if (data.results.length === 0) {
           console.log("error");
-          var error1 = $('<h2>')
-          error1.text('Error')
+          var error1 = $("<h2>");
+          error1.text("Error");
           trial1.append(error1);
         } else if (data.results.length != 0) {
-          var SearchedTitleDiv = $('#searched-title')
-          var searchedTitle = $('<h3>');
-          
-          searchedDiv.text('')
-          SearchedTitleDiv.text('')
-          
-          searchedTitle.text('Searched Movie: ' + title.toUpperCase())
-          searchedTitle.addClass("is-size-2 is-family-sans-serif has-text-black m-6");
-          SearchedTitleDiv.append(searchedTitle)
-          for (i = 0; i < 8; i++){
-            createMovieGrid(searchedDiv, data.results[i])
+          var SearchedTitleDiv = $("#searched-title");
+          var searchedTitle = $("<h3>");
+
+          searchedDiv.text("");
+          SearchedTitleDiv.text("");
+
+          searchedTitle.text("Searched Movie: " + title.toUpperCase());
+          searchedTitle.addClass(
+            "is-size-2 is-family-sans-serif has-text-black m-6"
+          );
+          SearchedTitleDiv.append(searchedTitle);
+          for (i = 0; i < 8; i++) {
+            createMovieGrid(searchedDiv, data.results[i]);
           }
-          
-          movieId = data.results[0].id;
-          console.log(typeof movieId);
-          moviecredits();
+
+          // movieId = data.results[i].id;
+          // console.log(typeof movieId);
+          // moviecredits();
           // inputEl(data);
         }
       });
     } else {
       console.log("error");
-    }
-  });
-}
-
-function inputEl(data) {
-  console.log(data);
-  console.log(data.results[0].overview);
-  console.log(data.results[0].poster_path);
-  console.log(data.results[0].media_type);
-  console.log(data.results[0].id);
-  movidId = data.results[0].id;
-
-  var movieTitle = document.createElement("h2");
-  var description = document.createElement("p");
-  movieTitle.textContent = data.results[0].title;
-  description.textContent = data.results[0].overview;
-
-  var currentimage = document.createElement("img");
-  currentimage.src =
-    "https://image.tmdb.org/t/p/w500" + data.results[0].poster_path;
-  trial1.append(movieTitle, description, currentimage);
-}
-
-function moviecredits() {
-  var requestCity =
-    "https://api.themoviedb.org/3/movie/" +
-    movieId +
-    "/credits?language=en-US&api_key=" +
-    apiKey;
-  fetch(requestCity).then(function (response) {
-    if (response.ok) {
-      console.log("credits data");
-      console.log(response);
-      response.json().then(function (data) {
-        console.log(data);
-        for (var i = 0; i < 5; i++) {
-          console.log(data.cast[i].name);
-        }
-      });
-    } else {
-      alert("Error: " + response.statusText);
     }
   });
 }
@@ -149,8 +108,6 @@ function createMovieGrid(location, movieData) {
     var moviePoster = placeholderImage;
   }
 
-  
-  
   var movieId = movieData.id;
   var createDiv = $("<div>");
   var imageDiv = $("<div>");
@@ -168,7 +125,7 @@ function createMovieGrid(location, movieData) {
   titleDiv.addClass(
     "content is-medium is-family-sans-serif has-text-black has-text-centered "
   );
-  createDiv.attr('id',movieId)
+  createDiv.attr("id", movieId);
   imgTag.attr("src", moviePoster);
   console.log(movieTitle, moviePoster, movieId);
 }
