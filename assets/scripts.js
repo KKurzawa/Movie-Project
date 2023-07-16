@@ -4,36 +4,44 @@ var searchedDiv = $('#searched')
 var popularContainer = $("#popular-container");
 var placeholderImage = 'https://www.content.numetro.co.za/ui_images/no_poster.png'
 
+var trial1 = document.getElementById("trial");
 var serachBtn = document.getElementById("search-btn");
 
+//check if the search exists adds event listener
 if (serachBtn) {
   serachBtn.addEventListener("click", getTitle);
 }
 
+//adds event listener to dynamiclly created items
 $('body').on('click', '.card-movie', loadPage)
 
+//function for taking search input and calling fetch function
 function getTitle() {
   var input = document.querySelector(".input");
   title = input.value;
   console.log(title);
   request(title);
 }
+
+//function to change page
 function loadPage() {
   window.location.assign(
     "results.html?q=" +
-      encodeURIComponent(document.querySelector("input.input").value)
+      encodeURIComponent(this.id)
   );
   getSearchParameters();
 }
+
+//function to fetch with query parameters
 function getSearchParameters() {
   var movieTitle = new URLSearchParams(window.location.search);
   title = movieTitle.get("q");
   console.log(title);
   request();
 }
-var trial1 = document.getElementById("trial");
 
 
+//function to fetch api
 function request(title) {
   var requestMovies =
     "https://api.themoviedb.org/3/search/multi?&language=en-US&query=" +
@@ -41,9 +49,11 @@ function request(title) {
     "&api_key=" +
     apiKey;
   fetch(requestMovies).then(function (response) {
+    //checks if fetch response if ok
     if (response.ok) {
       console.log("all good");
       console.log(response);
+      //converst reponse to json
       response.json().then(function (data) {
         console.log(data);
         if (data.results.length === 0) {
@@ -52,15 +62,17 @@ function request(title) {
           error1.text('Error')
           trial1.append(error1);
         } else if (data.results.length != 0) {
+          //creates a title and div container for searched movie title
           var SearchedTitleDiv = $('#searched-title')
           var searchedTitle = $('<h3>');
-          
+          //clears previous search
           searchedDiv.text('')
           SearchedTitleDiv.text('')
-          
+          //setting html and appending search to div
           searchedTitle.text('Searched Movie: ' + title.toUpperCase())
           searchedTitle.addClass("is-size-2 is-family-sans-serif has-text-black m-6");
           SearchedTitleDiv.append(searchedTitle)
+          //calls the function of movie grid and passes the location and data 
           for (i = 0; i < 8; i++){
             createMovieGrid(searchedDiv, data.results[i])
           }
@@ -119,6 +131,7 @@ function moviecredits() {
 }
 
 function getPopular() {
+  //fetch recently popular movies
   var requestPopular =
     "https://api.themoviedb.org/3/movie/popular?&language=en-US&api_key=" +
     apiKey;
@@ -128,7 +141,9 @@ function getPopular() {
       console.log(response);
       response.json().then(function (data) {
         console.log(data);
-        for (var i = 0; i < 10; i++) {
+        //calls movie grid function and passes a location and data 
+        for (var i = 0; i < 8; i++) {
+          //limit to first 8 results
           createMovieGrid(popularContainer, data.results[i]);
         }
       });
@@ -136,13 +151,14 @@ function getPopular() {
   });
 }
 function createMovieGrid(location, movieData) {
+  //checks if moveData.title exists or movieData.name exists and sets 
   if (movieData.title) {
     var movieTitle = movieData.title;
   }
   if (movieData.name) {
     var movieTitle = movieData.name;
   }
-
+//checks if there is a poster path and if not returns a place holder image
   if (movieData.poster_path) {
     var moviePoster = "https://image.tmdb.org/t/p/w342" + movieData.poster_path;
   } else {
@@ -172,6 +188,8 @@ function createMovieGrid(location, movieData) {
   imgTag.attr("src", moviePoster);
   console.log(movieTitle, moviePoster, movieId);
 }
+
+//checks if popular-container exists if so run function
 if ($("#popular-container")) {
   getPopular();
 }
