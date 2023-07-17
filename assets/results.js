@@ -23,7 +23,10 @@ function movieData() {
         document.querySelector("#title").innerHTML=title;
         //displays storyline
         var storyline = data.overview;
-        document.querySelector("#storyline").innerHTML=storyline;
+        document.querySelector("#storyline").innerHTML = storyline;
+        var posterPath = data.poster_path
+        var poster = $('#poster')
+        poster.attr('src', 'https://image.tmdb.org/t/p/w300' +posterPath)
       });
     }  
   });
