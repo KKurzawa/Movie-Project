@@ -5,7 +5,7 @@ var popularContainer = $("#popular-container");
 var placeholderImage =
   "https://www.content.numetro.co.za/ui_images/no_poster.png";
 
-var trial1 = document.getElementById("trial");
+var notFound = $("#not-found");
 var serachBtn = document.getElementById("search-btn");
 
 //check if the search exists adds event listener
@@ -18,10 +18,17 @@ $("body").on("click", ".card-movie", loadPage);
 
 //function for taking search input and calling fetch function
 function getTitle() {
+  notFound.text("");
   var input = document.querySelector(".input");
   title = input.value;
-  console.log(title);
-  request(title);
+  if (title.trim().length === 0) {
+    var error1 = $("<h2>");
+    error1.text("Enter Movie Title");
+    error1.addClass("is-size-3 is-family-sans-serif has-text-danger");
+    notFound.append(error1);
+  } else {
+    request(title);
+  }
 }
 
 //function to change page
@@ -42,8 +49,6 @@ function getSearchParameters() {
 //   console.log("url pulled id " + idMovie);
 // }
 
-var trial1 = document.getElementById("trial");
-
 //function to fetch api
 function request(title) {
   var requestMovies =
@@ -60,12 +65,15 @@ function request(title) {
       response.json().then(function (data) {
         console.log(data);
         if (data.results.length === 0) {
+          notFound.text("");
           console.log("error");
           var error1 = $("<h2>");
-          error1.text("Error");
-          trial1.append(error1);
+          error1.text("No Search Results");
+          error1.addClass("is-size-3 is-family-sans-serif has-text-danger");
+          notFound.append(error1);
         } else if (data.results.length != 0) {
           //creates a title and div container for searched movie title
+          notFound.text("");
           var SearchedTitleDiv = $("#searched-title");
           var searchedTitle = $("<h3>");
           //clears previous search
