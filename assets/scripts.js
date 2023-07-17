@@ -100,7 +100,7 @@ function request(title) {
 
           movieId = data.results[0].id;
           console.log(typeof movieId);
-          // moviecredits();
+
           // inputEl(data);
         }
       });
