@@ -114,7 +114,7 @@ function createMovieGrid(location, movieData) {
   imageDiv.append(imgTag);
   titleDiv.append(pTag);
   pTag.text(movieTitle);
-  createDiv.addClass("card-movie is-inline-block p-4 m-5");
+  createDiv.addClass("recommendations-card is-inline-block p-4 m-5");
   imageDiv.addClass("image");
   titleDiv.addClass(
     "content is-medium is-family-sans-serif has-text-black has-text-centered "
