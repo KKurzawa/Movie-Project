@@ -77,6 +77,8 @@ function request(title) {
             "is-size-2 is-family-sans-serif has-text-black m-6"
           );
           SearchedTitleDiv.append(searchedTitle);
+          //saves title to local storage
+          localStorage.setItem("Title", title);
           //calls the function of movie grid and passes the location and data
           for (i = 0; i < 8; i++) {
             createMovieGrid(searchedDiv, data.results[i]);
