@@ -88,13 +88,19 @@ function request(title) {
           //saves title to local storage
           localStorage.setItem("Title", title);
           //calls the function of movie grid and passes the location and data
-          for (i = 0; i < 8; i++) {
-            createMovieGrid(searchedDiv, data.results[i]);
+          if (data.results.length < 8) {
+            for (i = 0; i < data.results.length; i++) {
+              createMovieGrid(searchedDiv, data.results[i]);
+            }
+          } else {
+            for (i = 0; i < 8; i++) {
+              createMovieGrid(searchedDiv, data.results[i]);
+            }
           }
 
           movieId = data.results[0].id;
           console.log(typeof movieId);
-          
+
           // inputEl(data);
         }
       });
