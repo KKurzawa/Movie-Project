@@ -5,6 +5,8 @@ function getSearchParameters() {
   var params = new URLSearchParams(window.location.search);
   idMovie = params.get("q");
   console.log("url pulled id " + idMovie);
+  //saves id to local storage
+  localStorage.setItem("id", idMovie);
 }
 
 // gets description data, title, movie poster, description
