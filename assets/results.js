@@ -9,6 +9,13 @@ function getSearchParameters() {
   localStorage.setItem("id", idMovie);
 }
 
+//reassigns page to clicked on move rec
+function loadPage() {
+  window.location.assign("results.html?q=" + encodeURIComponent(this.id));
+}
+//event listener for rec movies
+$("body").on("click", ".recommendations-card", loadPage);
+
 // gets description data, title, movie poster, description
 function movieData() {
   var detailsRequest =
