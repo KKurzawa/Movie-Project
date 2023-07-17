@@ -66,8 +66,65 @@ function moviecredits() {
   });
 }
 
+function movieRecommendations() {
+  var requestRecommendation = "https://api.themoviedb.org/3/movie/" + idMovie + "/recommendations?&api_key=" + apiKey;  
+  var createRecommendation = $(".recommendations")
+  fetch(requestRecommendation).then(function (response){
+    if (response.ok) {
+      console.log("recommendation data")
+      return response.json()
+    }
+  }).then(function (data){
+    console.log(data)
+    for (var i = 0; i < 8; i++){
+     createMovieGrid(createRecommendation, data.results[i]) 
+    }
+    
+  }
+  )
+  
+}
+
+function createMovieGrid(location, movieData) {
+  //checks if moveData.title exists or movieData.name exists and sets
+  if (movieData.title) {
+    var movieTitle = movieData.title;
+  }
+  if (movieData.name) {
+    var movieTitle = movieData.name;
+  }
+  //checks if there is a poster path and if not returns a place holder image
+  if (movieData.poster_path) {
+    var moviePoster = "https://image.tmdb.org/t/p/w154" + movieData.poster_path;
+  } else {
+    var moviePoster = placeholderImage;
+  }
+
+  var movieId = movieData.id;
+  var createDiv = $("<div>");
+  var imageDiv = $("<div>");
+  var titleDiv = $("<div>");
+  var imgTag = $("<img>");
+  var pTag = $("<p>");
+  location.append(createDiv);
+  createDiv.append(imageDiv);
+  createDiv.append(titleDiv);
+  imageDiv.append(imgTag);
+  titleDiv.append(pTag);
+  pTag.text(movieTitle);
+  createDiv.addClass("card-movie is-inline-block p-4 m-5");
+  imageDiv.addClass("image");
+  titleDiv.addClass(
+    "content is-medium is-family-sans-serif has-text-black has-text-centered "
+  );
+  createDiv.attr("id", movieId);
+  imgTag.attr("src", moviePoster);
+  console.log(movieTitle, moviePoster, movieId);
+}
 getSearchParameters();
 movieData();
 moviecredits();
+movieRecommendations();
+
 
 
