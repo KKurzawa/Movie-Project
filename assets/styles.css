@@ -6,7 +6,9 @@
   background-color: white;
   overflow: hidden;
 }
-
+ .rounded { 
+  border-radius: 5%;
+} 
 .recommendations-card {
   height: 231px;
   width: 154px;
