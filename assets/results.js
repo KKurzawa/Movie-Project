@@ -35,7 +35,8 @@ function movieData() {
         document.querySelector("#storyline").innerHTML = storyline;
         var posterPath = data.poster_path
         var poster = $('#poster')
-        poster.attr('src', 'https://image.tmdb.org/t/p/w300' +posterPath)
+        poster.attr('src', 'https://image.tmdb.org/t/p/w500' +posterPath)
+        poster.addClass("rounded")
       });
     }  
   });
@@ -48,6 +49,7 @@ function moviecredits() {
     idMovie +
     "/credits?language=en-US&api_key=" +
     apiKey;
+  
   fetch(requestCity).then(function (response) {
     if (response.ok) {
       console.log("credits data");
@@ -55,18 +57,20 @@ function moviecredits() {
       response.json().then(function (data) {
         console.log(data);
         for (var i = 0; i < 5; i++) {
-          console.log(data.cast[i].name);
-          //displays cast
-          var elActorOne = data.cast[0].name;
-          document.querySelector("#actorOne").innerHTML = elActorOne;
-          var elActorTwo = data.cast[1].name;
-          document.querySelector("#actorTwo").innerHTML = elActorTwo;
-          var elActorThree = data.cast[2].name;
-          document.querySelector("#actorThree").innerHTML = elActorThree;
-          var elActorFour = data.cast[3].name;
-          document.querySelector("#actorFour").innerHTML = elActorFour;
-          var elActorFive = data.cast[4].name;
-          document.querySelector("#actorFive").innerHTML = elActorFive;
+          var profilePicture = data.cast[i].profile_path;
+          var imageDiv = $("<div>");
+          var imgTag = $("<img>");
+          var pTag = $("<p>");
+          var castContent = $("#cast-section");
+
+          console.log(data.cast[i].profile_path);
+          castContent.append(imageDiv)
+          imageDiv.append(imgTag)
+          imageDiv.append(pTag)
+          pTag.text(data.cast[i].name)
+          pTag.addClass("has-text-weight-bold has-text-centered")
+          imgTag.attr("src", 'https://image.tmdb.org/t/p/w154' + profilePicture)
+          imgTag.addClass("rounded")
          }
       });
     } else {

@@ -1,66 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Movies</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
-      integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
-    />
-    <link href="./assets/styles.css" rel="stylesheet" />
-  </head>
-  <body>
-    <nav class="navbar is-black" role="navigation" aria-label="main navigation">
-      <div class="is-size-1 ml-5 is-family-sans-serif">
-        <h1>Team Three Movies</h1>
-      </div>
-      <div class="navbar-end">
-        <a
-          class="navbar-item mr-4 is-size-4 is-family-sans-serif"
-          href="./index.html"
-        >
-          Home
-        </a>
-      </div>
-    </nav>
 
-    <div class="columns">
-      <div class="column is-one-quarter m-5">
-        <div class="image is-150x250px">
-          <img id="poster"/>
-        </div>
-      </div>
-      <div class="column is-family-sans-serif has-text-black m-5">
-        <h1 id="title" class="title mb-6 is-size-2"></h1>
-        <h2 class="subtitle has-text-weight-bold">Starring:</h2>
-        <h5 id="actorOne"></h5>
-        <h5 id="actorTwo"></h5>
-        <h5 id="actorThree"></h5>
-        <h5 id="actorFour"></h5>
-        <h5 id="actorFive"></h5>
-        <br />
-        <h2 class="subtitle has-text-weight-bold">Storyline:</h2>
-        <p id="storyline"></p>
-        </p>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Movies</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+  <link href="./assets/styles.css" rel="stylesheet" />
+</head>
+
+<body>
+  <nav class="navbar is-black" role="navigation" aria-label="main navigation">
+    <div class="is-size-1 ml-5 is-family-sans-serif">
+      <h1>Team Three Movies</h1>
+    </div>
+    <div class="navbar-end">
+      <a class="navbar-item mr-4 is-size-4 is-family-sans-serif" href="./index.html">
+        Home
+      </a>
+    </div>
+  </nav>
+
+  <div class="columns">
+    <div class="column is-one-quarter m-5">
+      <div class="image is-150x250px">
+        <img id="poster" />
       </div>
     </div>
-    <h2 class="subtitle has-text-weight-bold ml-5">More movies like this:</h2>
-    <div class="recommendations is-flex is-flex-wrap-wrap is-justify-content-center">
-      
+    <div class="column is-family-sans-serif has-text-black m-5">
+      <h1 id="title" class="title mb-6 is-size-1"></h1>
+      <h2 class="subtitle has-text-weight-bold">Starring:</h2>
+      <div id="cast-section" class="is-flex is-flex-wrap-wrap is-justify-content-space-evenly">
+      </div>
+      <br />
+      <h2 class="subtitle has-text-weight-bold">Storyline:</h2>
+      <p id="storyline" class="is-size-4"></p>
+      </p>
     </div>
-    <script
-      src="https://code.jquery.com/jquery-3.7.0.js"
-      integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
-      crossorigin="anonymous"
-    ></script>
-    <script src="./assets/results.js"></script>
-  </body>
+  </div>
+  <h2 class="subtitle has-text-weight-bold ml-5">More movies like this:</h2>
+  <div class="recommendations is-flex is-flex-wrap-wrap is-justify-content-center">
+
+  </div>
+  <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+    crossorigin="anonymous"></script>
+  <script src="./assets/results.js"></script>
+</body>
+
 </html>
