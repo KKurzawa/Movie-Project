@@ -35,3 +35,8 @@
   width: 342px;
   object-fit: cover;
 }
+
+/* added */
+#search-history > * {
+  border: 2px solid black;
+}
