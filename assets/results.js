@@ -1,6 +1,8 @@
 var apiKey = "1ab627320337b55a37f95f68c3756c74";
 var idMovie;
- 
+var placeholderImage =
+  "https://www.incluvie.com/build/public/img/NoImage_r.jpg";
+
 function getSearchParameters() {
   var params = new URLSearchParams(window.location.search);
   idMovie = params.get("q");
@@ -29,16 +31,16 @@ function movieData() {
         console.log(data);
         //Displays title
         var title = data.original_title;
-        document.querySelector("#title").innerHTML=title;
+        document.querySelector("#title").innerHTML = title;
         //displays storyline
         var storyline = data.overview;
         document.querySelector("#storyline").innerHTML = storyline;
         var posterPath = data.poster_path
         var poster = $('#poster')
-        poster.attr('src', 'https://image.tmdb.org/t/p/w500' +posterPath)
+        poster.attr('src', 'https://image.tmdb.org/t/p/w500' + posterPath)
         poster.addClass("rounded")
       });
-    }  
+    }
   });
 }
 
@@ -49,7 +51,7 @@ function moviecredits() {
     idMovie +
     "/credits?language=en-US&api_key=" +
     apiKey;
-  
+
   fetch(requestCity).then(function (response) {
     if (response.ok) {
       console.log("credits data");
@@ -57,7 +59,11 @@ function moviecredits() {
       response.json().then(function (data) {
         console.log(data);
         for (var i = 0; i < 5; i++) {
-          var profilePicture = data.cast[i].profile_path;
+          if (data.cast[i].profile_path) {
+            var profilePicture = 'https://image.tmdb.org/t/p/w185' + data.cast[i].profile_path;
+          } else {
+            var profilePicture = placeholderImage;
+          }
           var imageDiv = $("<div>");
           var imgTag = $("<img>");
           var pTag = $("<p>");
@@ -69,9 +75,9 @@ function moviecredits() {
           imageDiv.append(pTag)
           pTag.text(data.cast[i].name)
           pTag.addClass("has-text-weight-bold has-text-centered")
-          imgTag.attr("src", 'https://image.tmdb.org/t/p/w154' + profilePicture)
+          imgTag.attr("src", profilePicture)
           imgTag.addClass("rounded")
-         }
+        }
       });
     } else {
       alert("Error: " + response.statusText);
@@ -80,22 +86,22 @@ function moviecredits() {
 }
 
 function movieRecommendations() {
-  var requestRecommendation = "https://api.themoviedb.org/3/movie/" + idMovie + "/recommendations?&api_key=" + apiKey;  
+  var requestRecommendation = "https://api.themoviedb.org/3/movie/" + idMovie + "/recommendations?&api_key=" + apiKey;
   var createRecommendation = $(".recommendations")
-  fetch(requestRecommendation).then(function (response){
+  fetch(requestRecommendation).then(function (response) {
     if (response.ok) {
       console.log("recommendation data")
       return response.json()
     }
-  }).then(function (data){
+  }).then(function (data) {
     console.log(data)
-    for (var i = 0; i < 8; i++){
-     createMovieGrid(createRecommendation, data.results[i]) 
+    for (var i = 0; i < 8; i++) {
+      createMovieGrid(createRecommendation, data.results[i])
     }
-    
+
   }
   )
-  
+
 }
 
 function createMovieGrid(location, movieData) {
