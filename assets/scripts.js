@@ -211,11 +211,14 @@ function createMovieGrid(location, movieData) {
   cardContainer.addClass('card-movie-container')
   createDiv.addClass("card-movie is-inline-block p-4 m-5");
   imageDiv.addClass("image");
+  
   titleDiv.addClass(
     "textColor content is-medium is-family-sans-serif has-text-centered "
   );
+
   createDiv.attr("id", movieId);
   imgTag.attr("src", moviePoster);
+  imgTag.attr('alt', movieTitle + ' poster')
   console.log(movieTitle, moviePoster, movieId);
 }
 

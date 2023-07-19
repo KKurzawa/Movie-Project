@@ -39,6 +39,7 @@ function movieData() {
         var poster = $('#poster')
         poster.attr('src', 'https://image.tmdb.org/t/p/w500' + posterPath)
         poster.addClass("rounded")
+        poster.attr('alt', title + ' poster')
       });
     }
   });
@@ -76,6 +77,7 @@ function moviecredits() {
           pTag.text(data.cast[i].name)
           pTag.addClass("textColor has-text-weight-bold has-text-centered")
           imgTag.attr("src", profilePicture)
+          imgTag.attr('alt', data.cast[i].name + ' poster')
           imgTag.addClass("rounded")
         }
       });
@@ -139,6 +141,7 @@ function createMovieGrid(location, movieData) {
   );
   createDiv.attr("id", movieId);
   imgTag.attr("src", moviePoster);
+  imgTag.attr("alt", movieTitle + ' poster');
   console.log(movieTitle, moviePoster, movieId);
 }
 getSearchParameters();
