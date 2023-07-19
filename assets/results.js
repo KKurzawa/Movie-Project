@@ -6,19 +6,19 @@ var placeholderImage =
 function getSearchParameters() {
   var params = new URLSearchParams(window.location.search);
   idMovie = params.get("q");
-  console.log("url pulled id " + idMovie);
   //saves id to local storage
   localStorage.setItem("id", idMovie);
 }
 
-//reassigns page to clicked on move rec
+//reassigns page to clicked on movie rec
 function loadPage() {
   window.location.assign("results.html?q=" + encodeURIComponent(this.id));
 }
+
 //event listener for rec movies
 $("body").on("click", ".recommendations-card", loadPage);
 
-// gets description data, title, movie poster, description
+//gets description data, title, movie poster, description
 function movieData() {
   var detailsRequest =
     "https://api.themoviedb.org/3/movie/" +
@@ -28,13 +28,13 @@ function movieData() {
   fetch(detailsRequest).then(function (response) {
     if (response.ok) {
       response.json().then(function (data) {
-        console.log(data);
-        //Displays title
+        //displays title
         var title = data.original_title;
         document.querySelector("#title").innerHTML = title;
         //displays storyline
         var storyline = data.overview;
         document.querySelector("#storyline").innerHTML = storyline;
+        //displays poster
         var posterPath = data.poster_path
         var poster = $('#poster')
         poster.attr('src', 'https://image.tmdb.org/t/p/w500' + posterPath)
@@ -54,10 +54,7 @@ function moviecredits() {
 
   fetch(requestCity).then(function (response) {
     if (response.ok) {
-      console.log("credits data");
-      console.log(response);
       response.json().then(function (data) {
-        console.log(data);
         for (var i = 0; i < 5; i++) {
           if (data.cast[i].profile_path) {
             var profilePicture = 'https://image.tmdb.org/t/p/w185' + data.cast[i].profile_path;
@@ -69,7 +66,6 @@ function moviecredits() {
           var pTag = $("<p>");
           var castContent = $("#cast-section");
 
-          console.log(data.cast[i].profile_path);
           castContent.append(imageDiv)
           imageDiv.append(imgTag)
           imageDiv.append(pTag)
@@ -90,20 +86,16 @@ function movieRecommendations() {
   var createRecommendation = $(".recommendations")
   fetch(requestRecommendation).then(function (response) {
     if (response.ok) {
-      console.log("recommendation data")
       return response.json()
     }
   }).then(function (data) {
-    console.log(data)
     for (var i = 0; i < 8; i++) {
       createMovieGrid(createRecommendation, data.results[i])
     }
-
-  }
-  )
-
+  })
 }
 
+//displays movie recommendations
 function createMovieGrid(location, movieData) {
   //checks if moveData.title exists or movieData.name exists and sets
   if (movieData.title) {
@@ -139,8 +131,8 @@ function createMovieGrid(location, movieData) {
   );
   createDiv.attr("id", movieId);
   imgTag.attr("src", moviePoster);
-  console.log(movieTitle, moviePoster, movieId);
 }
+
 getSearchParameters();
 movieData();
 moviecredits();
