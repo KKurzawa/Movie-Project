@@ -134,8 +134,10 @@ $("body").on("click", ".history-input", addSearch);
 function addSearch() {
   var searchBox = $(".input");
   searchBox.val(this.id);
-  searchBox.addClass("column");
+  searchBox.addClass(column);
 }
+
+
 
 function getPopular() {
   //fetch recently popular movies
@@ -171,17 +173,20 @@ function createMovieGrid(location, movieData) {
   }
 
   var movieId = movieData.id;
+  var cardContainer = $('<div>')
   var createDiv = $("<div>");
   var imageDiv = $("<div>");
   var titleDiv = $("<div>");
   var imgTag = $("<img>");
   var pTag = $("<p>");
-  location.append(createDiv);
+  location.append(cardContainer);
+  cardContainer.append(createDiv);
   createDiv.append(imageDiv);
   createDiv.append(titleDiv);
   imageDiv.append(imgTag);
   titleDiv.append(pTag);
   pTag.text(movieTitle);
+  cardContainer.addClass('card-movie-container')
   createDiv.addClass("card-movie is-inline-block p-4 m-5");
   imageDiv.addClass("image");
   titleDiv.addClass(
