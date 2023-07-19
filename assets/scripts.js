@@ -17,6 +17,11 @@ if (serachBtn) {
 //adds event listener to dynamiclly created items
 $("body").on("click", ".card-movie", loadPage);
 
+//function to change page
+function loadPage() {
+  window.location.assign("results.html?q=" + encodeURIComponent(this.id));
+}
+
 //function for taking search input and calling fetch function
 function getTitle() {
   notFound.text("");
@@ -33,41 +38,24 @@ function getTitle() {
   }
 }
 
-// added
-$(window).on("load", function () {
-  var reset = JSON.parse(window.localStorage.getItem("Title"));
-  if (reset !== null) {
-    for (var i = 0; i < reset.length; i++) {
-      titlearray.push(reset[i]);
-    }
-  }
-});
+//Add titles to array and set to local storage
 function setLocalStorage(title) {
   titlearray.unshift(title);
   if (titlearray.length > 5) {
     titlearray.pop();
   }
-  console.log("the title array: " + titlearray);
   localStorage.setItem("Title", JSON.stringify(titlearray));
 }
 
-//function to change page
-function loadPage() {
-  window.location.assign("results.html?q=" + encodeURIComponent(this.id));
-}
-//function to fetch with query parameters
-function getSearchParameters() {
-  var movieTitle = new URLSearchParams(window.location.search);
-  title = movieTitle.get("q");
-  console.log(title);
-  request();
-}
-
-// function getSearchParameters() {
-//   var params = new URLSearchParams(window.location.search);
-//   var idMovie = params.get("q");
-//   console.log("url pulled id " + idMovie);
-// }
+//On load get titles from local storage
+$(window).on("load", function () {
+  var getTitles = JSON.parse(window.localStorage.getItem("Title"));
+  if (getTitles !== null) {
+    for (var i = 0; i < getTitles.length; i++) {
+      titlearray.push(getTitles[i]);
+    }
+  }
+});
 
 //function to fetch api
 function request(title) {
@@ -79,14 +67,10 @@ function request(title) {
   fetch(requestMovies).then(function (response) {
     //checks if fetch response if ok
     if (response.ok) {
-      console.log("all good");
-      console.log(response);
       //converst reponse to json
       response.json().then(function (data) {
-        console.log(data);
         if (data.results.length === 0) {
           notFound.text("");
-          console.log("error");
           var error1 = $("<h2>");
           error1.text("No Search Results");
           error1.addClass("is-size-3 is-family-sans-serif has-text-danger");
@@ -105,8 +89,6 @@ function request(title) {
             "textColor is-size-2 is-family-sans-serif m-6"
           );
           SearchedTitleDiv.append(searchedTitle);
-          //saves title to local storage
-
           //calls the function of movie grid and passes the location and data
           if (data.results.length < 8) {
             for (i = 0; i < data.results.length; i++) {
@@ -117,39 +99,37 @@ function request(title) {
               createMovieGrid(searchedDiv, data.results[i]);
             }
           }
-
           movieId = data.results[0].id;
-          console.log(typeof movieId);
-
-          // inputEl(data);
         }
       });
-    } else {
-      console.log("error");
     }
   });
 }
-// added
-$(".input").on("click", trialfx);
-function trialfx(event) {
+
+//When click into search bar show search history
+$(".input").on("click", searchHistory);
+function searchHistory(event) {
   event.stopPropagation();
   $("#search-history").empty();
-  let newObject = JSON.parse(window.localStorage.getItem("Title"));
-  // var createDiv = $("<div>");
-  if (newObject !== null) {
-    for (var i = 0; i < newObject.length; i++) {
+  let historyTitles = JSON.parse(window.localStorage.getItem("Title"));
+  if (historyTitles !== null) {
+    for (var i = 0; i < historyTitles.length; i++) {
       var createInput = $("<h5>");
       createInput.addClass("history-input");
-      createInput.attr("id", newObject[i]);
-      createInput.text(newObject[i]);
+      createInput.attr("id", historyTitles[i]);
+      createInput.text(historyTitles[i]);
       $("#search-history").append(createInput);
     }
   }
 }
-$("body").on("click", hideHx);
-function hideHx() {
+
+// Click out of search bar hide search history
+$("body").on("click", hideHistory);
+function hideHistory() {
   $("#search-history").empty();
 }
+
+// Click on search history add to search input
 $("body").on("click", ".history-input", addSearch);
 function addSearch() {
   var searchBox = $(".input");
@@ -166,10 +146,7 @@ function getPopular() {
     apiKey;
   fetch(requestPopular).then(function (response) {
     if (response.ok) {
-      console.log("Popular List");
-      console.log(response);
       response.json().then(function (data) {
-        console.log(data);
         //calls movie grid function and passes a location and data
         for (var i = 0; i < 8; i++) {
           //limit to first 8 results
@@ -179,6 +156,7 @@ function getPopular() {
     }
   });
 }
+
 function createMovieGrid(location, movieData) {
   //checks if moveData.title exists or movieData.name exists and sets
   if (movieData.title) {
@@ -216,7 +194,6 @@ function createMovieGrid(location, movieData) {
   );
   createDiv.attr("id", movieId);
   imgTag.attr("src", moviePoster);
-  console.log(movieTitle, moviePoster, movieId);
 }
 
 //checks if popular-container exists if so run function
