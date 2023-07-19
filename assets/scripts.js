@@ -154,6 +154,7 @@ $("body").on("click", ".history-input", addSearch);
 function addSearch() {
   var searchBox = $(".input");
   searchBox.val(this.id);
+  searchBox.addClass(column);
 }
 
 function inputEl(data) {
