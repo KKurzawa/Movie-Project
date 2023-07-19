@@ -6,7 +6,7 @@ This project creates a movie database that allows users to search for a movie, g
 
 ## Usage
 
-When the search page is loaded we see a text box with a search button along with posters for eight trending movies. When the user enters a movie into the text box and clicks search they are then presented with eight movies based on their entry. When the user then clicks on any of the movies displayed they are taken to a results page which displays the movie poster, names and pictures for the five most prominant actors in the movie, a summary of the storline, and posters for eight similar movies to their selection. If the user clicks on one of the similar movies the page is refreshed with all features of the clicked movie listed above. A home button is present in the navbar on both pages that when clicked takes the user to the initial state of the search page.
+When the search page is loaded the user sees a text box with a search button along with posters for eight trending movies. When the user enters a movie into the text box and clicks search they are then presented with eight movie posters based on their entry. When the cursor is in the text box the five most recent searches are displayed below the textbox. When the user clicks on one of the most recent searches it is then displayed in the textbox. When the user clicks on any of the movie posters displayed they are taken to a results page which displays the movie poster, names and pictures for the five most prominant actors in the movie, a summary of the storline, and posters for eight similar movies to their selection. If the user clicks on one of the similar movie posters the page is refreshed with all features of the clicked movie, listed above. A home button is present in the navbar on both pages that when clicked takes the user to the initial state of the search page.
 
 Screenshots:
 ![img1]()
@@ -25,8 +25,11 @@ GitHub Repository: https://github.com/KKurzawa/Movie-Project
 ## CREDITS
 
 Kris Kurzawa: https://github.com/KKurzawa
+
 Andrew Bostick: https://github.com/andbostick
+
 Lauren Lavelle: https://github.com/l-lavelle
+
 Cameron Morin: https://github.com/Morinc35
 
 TMBD API https://developer.themoviedb.org/docs
