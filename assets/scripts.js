@@ -102,7 +102,7 @@ function request(title) {
           //setting html and appending search to div
           searchedTitle.text("Searched Movie: " + title.toUpperCase());
           searchedTitle.addClass(
-            "is-size-2 is-family-sans-serif has-text-black m-6"
+            "textColor is-size-2 is-family-sans-serif m-6"
           );
           SearchedTitleDiv.append(searchedTitle);
           //saves title to local storage
@@ -169,7 +169,7 @@ function inputEl(data) {
   SearchedTitleDiv.text("");
 
   searchedTitle.text("Searched Movie: " + title.toUpperCase());
-  searchedTitle.addClass("is-size-2 is-family-sans-serif has-text-black m-6");
+  searchedTitle.addClass("is-size-2 is-family-sans-serif m-6");
   SearchedTitleDiv.append(searchedTitle);
   for (i = 0; i < 8; i++) {
     createMovieGrid(searchedDiv, data.results[i]);
@@ -231,7 +231,7 @@ function createMovieGrid(location, movieData) {
   createDiv.addClass("card-movie is-inline-block p-4 m-5");
   imageDiv.addClass("image");
   titleDiv.addClass(
-    "content is-medium is-family-sans-serif has-text-black has-text-centered "
+    "textColor content is-medium is-family-sans-serif has-text-centered "
   );
   createDiv.attr("id", movieId);
   imgTag.attr("src", moviePoster);

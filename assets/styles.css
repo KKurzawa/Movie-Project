@@ -13,8 +13,21 @@
 #home {
   color: rgba(1, 180, 228);
 }
-#nav {
+#nav,
+#search-btn {
   background-color: rgba(13, 37, 63);
+}
+#search-btn {
+  color: rgba(1, 180, 228);
+}
+
+.input,
+.textColor,
+#trending,
+#title,
+.subtitle,
+#storyline {
+  color: rgba(13, 37, 63);
 }
 .card-movie {
   height: 513px;
