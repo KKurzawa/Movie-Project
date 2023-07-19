@@ -1,7 +1,12 @@
+#logo-container {
+  position: relative;
+}
+
 #logo {
   width: 25%;
   height: auto;
-  float: right;
+  position: absolute;
+  right: 0;
   padding: 1%;
 }
 #team {
