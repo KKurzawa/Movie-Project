@@ -74,7 +74,7 @@ function moviecredits() {
           imageDiv.append(imgTag)
           imageDiv.append(pTag)
           pTag.text(data.cast[i].name)
-          pTag.addClass("has-text-weight-bold has-text-centered")
+          pTag.addClass("textColor has-text-weight-bold has-text-centered")
           imgTag.attr("src", profilePicture)
           imgTag.addClass("rounded")
         }
@@ -131,6 +131,7 @@ function createMovieGrid(location, movieData) {
   imageDiv.append(imgTag);
   titleDiv.append(pTag);
   pTag.text(movieTitle);
+  pTag.addClass("textColor");
   createDiv.addClass("recommendations-card is-inline-block p-4 m-5");
   imageDiv.addClass("image");
   titleDiv.addClass(
