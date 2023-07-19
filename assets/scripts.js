@@ -7,6 +7,7 @@ var placeholderImage =
 
 var notFound = $("#not-found");
 var serachBtn = document.getElementById("search-btn");
+var titlearray = [];
 
 //check if the search exists adds event listener
 if (serachBtn) {
@@ -27,8 +28,27 @@ function getTitle() {
     error1.addClass("is-size-3 is-family-sans-serif has-text-danger");
     notFound.append(error1);
   } else {
+    setLocalStorage(title);
     request(title);
   }
+}
+
+// added
+$(window).on("load", function () {
+  var reset = JSON.parse(window.localStorage.getItem("Title"));
+  if (reset !== null) {
+    for (var i = 0; i < reset.length; i++) {
+      titlearray.push(reset[i]);
+    }
+  }
+});
+function setLocalStorage(title) {
+  titlearray.unshift(title);
+  if (titlearray.length > 5) {
+    titlearray.pop();
+  }
+  console.log("the title array: " + titlearray);
+  localStorage.setItem("Title", JSON.stringify(titlearray));
 }
 
 //function to change page
@@ -86,7 +106,7 @@ function request(title) {
           );
           SearchedTitleDiv.append(searchedTitle);
           //saves title to local storage
-          localStorage.setItem("Title", title);
+
           //calls the function of movie grid and passes the location and data
           if (data.results.length < 8) {
             for (i = 0; i < data.results.length; i++) {
@@ -108,6 +128,32 @@ function request(title) {
       console.log("error");
     }
   });
+}
+// added
+$(".input").on("click", trialfx);
+function trialfx(event) {
+  event.stopPropagation();
+  $("#search-history").empty();
+  let newObject = JSON.parse(window.localStorage.getItem("Title"));
+  // var createDiv = $("<div>");
+  if (newObject !== null) {
+    for (var i = 0; i < newObject.length; i++) {
+      var createInput = $("<h5>");
+      createInput.addClass("history-input");
+      createInput.attr("id", newObject[i]);
+      createInput.text(newObject[i]);
+      $("#search-history").append(createInput);
+    }
+  }
+}
+$("body").on("click", hideHx);
+function hideHx() {
+  $("#search-history").empty();
+}
+$("body").on("click", ".history-input", addSearch);
+function addSearch() {
+  var searchBox = $(".input");
+  searchBox.val(this.id);
 }
 
 function inputEl(data) {
