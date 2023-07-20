@@ -10,11 +10,11 @@ When the search page is loaded the user sees a text box with a search button alo
 
 Screenshots:
 ![Team Three Movies Homepage](https://github.com/KKurzawa/Movie-Project/blob/main/assets/images/HomePage.PNG)
-![Search History](https://github.com/KKurzawa/Movie-Project/blob/main/assets\images\SearchHistory.PNG)
-![Movie Suggestions](https://github.com/KKurzawa/Movie-Project/blob/main/assets\images\SuggestionTab.PNG)
-![Treanding Movies](https://github.com/KKurzawa/Movie-Project/blob/main/assets\images\TrendingTab.PNG)
-![Movie Information and Poster](https://github.com/KKurzawa/Movie-Project/blob/main/assets\images\MovieInfo.PNG)
-![Recommended Movies](https://github.com/KKurzawa/Movie-Project/blob/main/assets\images\RecommendedTab.PNG)
+![Search History](https://github.com/KKurzawa/Movie-Project/blob/main/assets/images/SearchHistory.PNG)
+![Movie Suggestions](https://github.com/KKurzawa/Movie-Project/blob/main/assets/images/SuggestionTab.PNG)
+![Treanding Movies](https://github.com/KKurzawa/Movie-Project/blob/main/assets/images/TrendingTab.PNG)
+![Movie Information and Poster](https://github.com/KKurzawa/Movie-Project/blob/main/assets/images/MovieInfo.PNG)
+![Recommended Movies](https://github.com/KKurzawa/Movie-Project/blob/main/assets/images/RecommendedTab.PNG)
 
 
 Website URL:
