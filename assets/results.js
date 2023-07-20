@@ -98,9 +98,12 @@ function movieRecommendations() {
       }
     })
     .then(function (data) {
-      console.log(data);
       if (data.results.length === 0) {
         $("#more-movies").hide();
+      } else if (data.results.length < 8) {
+        for (var i = 0; i < data.results.length; i++) {
+          createMovieGrid(createRecommendation, data.results[i]);
+        }
       } else {
         for (var i = 0; i < 8; i++) {
           createMovieGrid(createRecommendation, data.results[i]);

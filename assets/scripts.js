@@ -134,10 +134,8 @@ $("body").on("click", ".history-input", addSearch);
 function addSearch() {
   var searchBox = $(".input");
   searchBox.val(this.id);
-  searchBox.addClass(column);
+  searchBox.addClass("column");
 }
-
-
 
 function getPopular() {
   //fetch recently popular movies
@@ -173,7 +171,7 @@ function createMovieGrid(location, movieData) {
   }
 
   var movieId = movieData.id;
-  var cardContainer = $('<div>')
+  var cardContainer = $("<div>");
   var createDiv = $("<div>");
   var imageDiv = $("<div>");
   var titleDiv = $("<div>");
@@ -186,10 +184,10 @@ function createMovieGrid(location, movieData) {
   imageDiv.append(imgTag);
   titleDiv.append(pTag);
   pTag.text(movieTitle);
-  cardContainer.addClass('card-movie-container')
+  cardContainer.addClass("card-movie-container");
   createDiv.addClass("card-movie is-inline-block p-4 m-5");
   imageDiv.addClass("image");
-  
+
   titleDiv.addClass(
     "textColor content is-medium is-family-sans-serif has-text-centered "
   );
@@ -197,8 +195,7 @@ function createMovieGrid(location, movieData) {
   createDiv.attr("id", movieId);
   imgTag.attr("src", moviePoster);
 
-  imgTag.attr('alt', movieTitle + ' poster')
-
+  imgTag.attr("alt", movieTitle + " poster");
 }
 
 //checks if popular-container exists if so run function
