@@ -16,8 +16,7 @@ Screenshots:
 ![Movie Information and Poster](https://github.com/KKurzawa/Movie-Project/blob/main/assets/images/MovieInfo.PNG)
 ![Recommended Movies](https://github.com/KKurzawa/Movie-Project/blob/main/assets/images/RecommendedTab.PNG)
 
-
-Website URL:
+Website URL: https://kkurzawa.github.io/Movie-Project/
 
 GitHub Repository: https://github.com/KKurzawa/Movie-Project
 
