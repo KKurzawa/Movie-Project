@@ -35,11 +35,11 @@ function movieData() {
         var storyline = data.overview;
         document.querySelector("#storyline").innerHTML = storyline;
         //displays poster
-        var posterPath = data.poster_path
-        var poster = $('#poster')
-        poster.attr('src', 'https://image.tmdb.org/t/p/w500' + posterPath)
-        poster.addClass("rounded")
-        poster.attr('alt', title + ' poster')
+        var posterPath = data.poster_path;
+        var poster = $("#poster");
+        poster.attr("src", "https://image.tmdb.org/t/p/w500" + posterPath);
+        poster.addClass("rounded");
+        poster.attr("alt", title + " poster");
       });
     }
   });
@@ -58,7 +58,8 @@ function moviecredits() {
       response.json().then(function (data) {
         for (var i = 0; i < 5; i++) {
           if (data.cast[i].profile_path) {
-            var profilePicture = 'https://image.tmdb.org/t/p/w185' + data.cast[i].profile_path;
+            var profilePicture =
+              "https://image.tmdb.org/t/p/w185" + data.cast[i].profile_path;
           } else {
             var profilePicture = placeholderImage;
           }
@@ -67,14 +68,14 @@ function moviecredits() {
           var pTag = $("<p>");
           var castContent = $("#cast-section");
 
-          castContent.append(imageDiv)
-          imageDiv.append(imgTag)
-          imageDiv.append(pTag)
-          pTag.text(data.cast[i].name)
-          pTag.addClass("textColor has-text-weight-bold has-text-centered")
-          imgTag.attr("src", profilePicture)
-          imgTag.attr('alt', data.cast[i].name + ' poster')
-          imgTag.addClass("rounded")
+          castContent.append(imageDiv);
+          imageDiv.append(imgTag);
+          imageDiv.append(pTag);
+          pTag.text(data.cast[i].name);
+          pTag.addClass("textColor has-text-weight-bold has-text-centered");
+          imgTag.attr("src", profilePicture);
+          imgTag.attr("alt", data.cast[i].name + " poster");
+          imgTag.addClass("rounded");
         }
       });
     } else {
@@ -84,17 +85,28 @@ function moviecredits() {
 }
 
 function movieRecommendations() {
-  var requestRecommendation = "https://api.themoviedb.org/3/movie/" + idMovie + "/recommendations?&api_key=" + apiKey;
-  var createRecommendation = $(".recommendations")
-  fetch(requestRecommendation).then(function (response) {
-    if (response.ok) {
-      return response.json()
-    }
-  }).then(function (data) {
-    for (var i = 0; i < 8; i++) {
-      createMovieGrid(createRecommendation, data.results[i])
-    }
-  })
+  var requestRecommendation =
+    "https://api.themoviedb.org/3/movie/" +
+    idMovie +
+    "/recommendations?&api_key=" +
+    apiKey;
+  var createRecommendation = $(".recommendations");
+  fetch(requestRecommendation)
+    .then(function (response) {
+      if (response.ok) {
+        return response.json();
+      }
+    })
+    .then(function (data) {
+      console.log(data);
+      if (data.results.length === 0) {
+        $("#more-movies").hide();
+      } else {
+        for (var i = 0; i < 8; i++) {
+          createMovieGrid(createRecommendation, data.results[i]);
+        }
+      }
+    });
 }
 
 //displays movie recommendations
@@ -133,14 +145,10 @@ function createMovieGrid(location, movieData) {
   );
   createDiv.attr("id", movieId);
   imgTag.attr("src", moviePoster);
-  imgTag.attr("alt", movieTitle + ' poster');
-
+  imgTag.attr("alt", movieTitle + " poster");
 }
 
 getSearchParameters();
 movieData();
 moviecredits();
 movieRecommendations();
-
-
-
