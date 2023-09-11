@@ -1,6 +1,6 @@
 # Movie Project
 
-## Project 1 in MSU Bootcamp
+## Description
 
 This project creates a movie database that allows users to search for a movie, give the user options based on their search and trending options, then displays the poster, cast, and storyline of their selection along with similar movies. This is an important tool for movie enthusiasts who are looking to get information on their favorite movies and find new movie options based on their tastes and the tastes of others. Building this project helped tighten up our teams HTML, CSS, JavaScript, and JQuery skills along with introducing us to the usage of Bulma and the TMBD API.
 
